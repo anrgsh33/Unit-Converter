@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Unit Converter</title>
+    <style>
+      /* Add some styling to the page */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2d79b;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .header {
+        margin-top: 50px;
+      }
+      .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+      }
+      .form input[type="text"] {
+        width: 200px;
+        height: 30px;
+        margin-bottom: 20px;
+        padding: 5px;
+        font-size: 16px;
+      }
+      .form select {
+        width: 200px;
+        height: 30px;
+        margin-bottom: 20px;
+        padding: 5px;
+        font-size: 16px;
+      }
+      .form button {
+        width: 100px;
+        height: 30px;
+        background-color: #4ea75e;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+      .result {
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Unit Converter</h1>
+      </div>
+      <div class="form">
+        <input type="text" id="value" placeholder="Enter Value" />
+        <select id="unit-from">
+          <option value="inch">Inches</option>
+          <option value="foot">Feet</option>
+          <option value="yard">Yards</option>
+          <option value="meter">Meters</option>
+          <option value="mile">Miles</option>
+          <option value="kilometer">Kilometers</option>
+        </select>
+        <p>to</p>
+        <select id="unit-to">
+          <option value="inch">Inches</option>
+          <option value="foot">Feet</option>
+          <option value="yard">Yards</option>
+          <option value="meter">Meters</option>
+          <option value="mile">Miles</option>
+          <option value="kilometer">Kilometers</option>
+        </select>
+        <button onclick="convert()">Convert</button>
+      </div>
+      <div class="result">
+        <p id="result"></p>
+      </div>
+    </div>
+
+    <script>
+      function convert() {
+        // Get the values from the form
+        let value = document.getElementById("value").value;
+        let unitFrom = document.getElementById("unit-from").value;
+        let unitTo = document.getElementById("unit-to").value;
+
+        // Check if the value is a number
+        if (isNaN(value)) {
+          document.getElementById("result").innerHTML =
+            "Please enter a valid number.";
+          return;
+        }
+
+        // Convert the value to meters
+        switch (unitFrom) {
+          case "inch":
+            value = value * 0.0254;
+            break;
+          case "foot":
+            value = value * 0.3048;
+            break;
+          case "yard":
+            value = value * 0.9144;
+            break;
+          case "mile":
+            value = value * 1609.34;
+            break;
+          case "kilometer":
+            value = value * 1000;
+            break;
+        }
+
+        // Convert the value from meters to the desired unit
+        switch (unitTo) {
+          case "inch":
+            value = value / 0.0254;
+            break;
+          case "foot":
+            value = value / 0.3048;
+            break;
+          case "yard":
+            value = value / 0.9144;
+            break;
+          case "mile":
+            value = value / 1609.34;
+            break;
+          case "kilometer":
+            value = value / 1000;
+            break;
+        }
+
+        // Display the result
+        document.getElementById("result").innerHTML = value + " " + unitTo;
+      }
+    </script>
+  </body>
+</html>
